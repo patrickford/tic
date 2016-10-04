@@ -1,0 +1,29 @@
+body {
+  width: 60%;
+  margin: 20px auto;
+}
+
+.board {
+  width: 320px;
+}
+
+.box {
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+  box-sizing: border-box;
+  font-size: 24px;
+}
+
+.row {
+  width: 320px;  
+  font-size: 0;
+}  
+
+.row-0, .row-1 {
+  border-bottom: solid black 3px;
+}
+
+.col-0, .col-1 {
+  border-right: solid black 3px;  
+}
