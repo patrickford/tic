@@ -1,22 +1,16 @@
 body {
   width: 60%;
   margin: 20px auto;
+  font-family: sans-serif;
 }
 
 .board {
   width: 320px;
 }
 
-.box {
-  height: 100px;
-  width: 100px;
-  display: inline-block;
-  box-sizing: border-box;
-  font-size: 24px;
-}
-
 .row {
   width: 320px;  
+  height: 100px;
   font-size: 0;
 }  
 
@@ -24,6 +18,21 @@ body {
   border-bottom: solid black 3px;
 }
 
-.col-0, .col-1 {
+.col-0 {
   border-right: solid black 3px;  
+}
+
+.col-2 {
+  border-left: solid black 3px;  
+}
+
+.box {
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+  box-sizing: border-box;
+  font-size: 48px;
+  text-align: center;
+  padding-top: 20px;
+  vertical-align: bottom;
 }
