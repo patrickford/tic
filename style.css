@@ -6,6 +6,7 @@ body {
 
 .board {
   width: 320px;
+  position: relative;
 }
 
 .row {
@@ -31,8 +32,27 @@ body {
   width: 100px;
   display: inline-block;
   box-sizing: border-box;
-  font-size: 48px;
   text-align: center;
   padding-top: 20px;
   vertical-align: bottom;
+}
+
+.marker {
+  font-size: 48px;
+}
+
+.diagonal {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: 400px;
+  border-bottom: solid 4px black;
+}
+
+.diagonal-left {
+  transform: rotate(-45deg);
+}
+
+.diagonal-right {
+  transform: rotate(45deg);
 }
