@@ -1,15 +1,16 @@
 $(document).ready(function() {
 
-  var Board = function() {
+  var Game = function() {
     this.board = new Array(3);
     this.players = ["X", "O"];
     this.turn = 0;
     this.moves = 0;
     this.plays = [];
-    this.winner = "";
+    this.winner = undefined;
   };
 
-  Board.prototype.buildBoard = function() { 
+  // Create HTML for game board and render in browser
+  Game.prototype.buildBoard = function() { 
     var html = "";      
     for (var row=0; row<3; row++) {
       this.board[row] = new Array(3);
@@ -23,15 +24,15 @@ $(document).ready(function() {
     $('.board').append(html);
   };
 
-  Board.prototype.makeMove = function(row, col) {
+  Game.prototype.makeMove = function(row, col) {
     var move = { player: this.turn, row: row, col: col };
     this.plays.push(move);
     this.board[row][col] = this.players[this.turn];    
     this.turn = ++this.moves % 2;   
   };
 
-  Board.prototype.evaluateBoard = function() {
-    for (var i=0; i<3; i++) {
+  Game.prototype.evaluateBoard = function() {
+    for (var i=0; i<=2; i++) {
       // Check Rows
       if (this.board[i][0] === this.board[i][1] && 
           this.board[i][0] === this.board[i][2] &&
@@ -46,23 +47,41 @@ $(document).ready(function() {
         this.winner = this.board[0][i];
         console.log("Winner: " + this.winner + " on column: " + i);
       }
-      // Check Diagonals
-
     }
-
+    // Check Diagonals
+      if ((this.board[0][0] === this.board[1][1] && 
+          this.board[0][0] === this.board[2][2] &&
+          this.board[0][0] !== undefined)) {
+        this.winner = this.board[0][0];
+        console.log("Winner: " + this.winner + " on diagonal");
+        $(".board").append("<div class='diagonal diagonal-right'></div>")        
+      }
+      if ((this.board[0][2] === this.board[1][1] && 
+          this.board[0][2] === this.board[2][0] &&
+          this.board[0][2] !== undefined)) {
+        this.winner = this.board[0][0];
+        console.log("Winner: " + this.winner + " on diagonal");
+        $(".board").append("<div class='diagonal diagonal-left'></div>")
+      }
   }
 
+  // Process click events on game board
   $(document).on('click', '.box', function() {
-    var row = parseInt(($(this).parent().attr('class')).match(/[0-2]/gi)[0]);
-    var col = parseInt(($(this).attr('class')).match(/[0-2]/gi)[0]);
+    var row = parseInt(($(this).parent().attr('class')).match(/[0-2]/g)[0]); 
+    var col = parseInt(($(this).attr('class')).match(/[0-2]/g)[0]);
     if (game.board[row][col] === undefined && !game.winner) {
       $(this).html("<span class='marker'>" + game.players[game.turn] + "</span>");    
       game.makeMove(row, col);
       game.evaluateBoard();
+      console.log(game.board);
+    }
+    if (game.winner) {
+      console.log(game);
     }
   });
 
-  var game = new Board();
+  // Instantiate game board
+  var game = new Game();
   game.buildBoard();
 
 });
